@@ -79,6 +79,12 @@ var startgame = function() {
             var pickedenemyname = enemynames[i];
             enemyhealth = 50;
             fight(pickedenemyname);
+            if (i < enemynames - 1 && playerhealth > 0) {
+                var confirmshop = window.confirm("The fight is over, visit the store before the next round?")
+                if (confirmshop) {
+                    shop();
+                }
+            }
         } else {
             window.alert("You lost your robot in battale ! Game over !");
             break;
@@ -99,5 +105,9 @@ var endgame = function() {
     } else {
         window.alert("Thank you for playing Robot Gladiators! come back soon!");
     }
+}
+var shop = function() {
+    console.log("entered the shop");
+
 }
 startgame();
