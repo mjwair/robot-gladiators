@@ -18,12 +18,12 @@ var fight = function(enemyname) {
             var confirmskip = window.confirm("Are you sure you'd like to quit?");
             if (confirmskip) {
                 window.alert(playername + " has decided to skip this fight. Goodbye!");
-                playermoney = playermoney - 10;
+                playermoney = Math.max(playermoney - 10, 0);
                 console.log("player money  ", playermoney)
                 break;
             }
         }
-        enemyhealth = enemyhealth - playerattack
+        enemyhealth = Math.max(enemyhealth - playerattack, 0);
         console.log(playername + " attacked " + enemyname + " . " + enemyname + " now has " + enemyhealth + " health remaining. ")
         if (enemyhealth <= 0) {
             window.alert(enemyname + " has died!");
@@ -32,7 +32,7 @@ var fight = function(enemyname) {
         } else {
             window.alert(enemyname + " still has " + enemyhealth + " heath left.");
         }
-        playerhealth = playerhealth - enemyattack;
+        playerhealth = Math.max(0, playerhealth - enemyattack);
         console.log(enemyhealth + " attacked " + playername + " now has " + playerhealth + " health remaining");
         if (playerhealth <= 0) {
             window.alert(playername + " has died!")
@@ -70,7 +70,7 @@ var fight = function(enemyname) {
     }
 }
 var startgame = function() {
-    playerhealth = 100;
+    playerhealth = Math.floor(Math.random() * 21) + 40;
     playerattack = 10;
     playermoney = 10;
     for (var i = 0; i < enemynames.length; i++) {
@@ -79,7 +79,7 @@ var startgame = function() {
             var pickedenemyname = enemynames[i];
             enemyhealth = 50;
             fight(pickedenemyname);
-            if (i < enemynames - 1 && playerhealth > 0) {
+            if (i < enemynames.length - 1 && playerhealth > 0) {
                 var confirmshop = window.confirm("The fight is over, visit the store before the next round?")
                 if (confirmshop) {
                     shop();
@@ -107,7 +107,41 @@ var endgame = function() {
     }
 }
 var shop = function() {
-    console.log("entered the shop");
+    var shopoptianpromot = window.prompt("Would you like to Refill your health,Upgrade your attack ,or Leave the shop ");
+    switch (shopoptianpromot) {
+        case "refill":
+        case "REFILL":
+            if (playermoney >= 7) {
+                window.alert("Refilling players health by 20 for 7 dollars.")
+                playerhealth = playerhealth + 20;
+                playermoney = playermoney - 7;
+            } else {
+                window.alert("You dont have enough money")
+            }
+            break;
+        case "upgrade":
+        case "UPGRADE":
+            if (playermoney >= 7) {
+                window.alert("Upgrading player attack by 6 for 7 dollars. ");
+                playerattack = playerattack + 6;
+                playermoney = playermoney - 7;
+            } else {
+                window.alert("You dont have enongh money")
+            }
+            break;
+        case "leave":
+        case "LEAVE":
+            {
+                widoow.alert("Leaving the store. ")
+                break;
+
+            }
+        default:
+            window.alert("You did not pick a valid option. try again.");
+            shop();
+            break;
+
+    }
 
 }
-startgame();
+startgame()
