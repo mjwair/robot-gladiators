@@ -3,10 +3,18 @@ var randomnumber = function(min, max) {
     return value;
 
 }
+var getplayername = function() {
+    var name = "";
+    while (name === "" || name === null) {
+        name = prompt("What is your robot's name?")
+    }
+    console.log("Your robot name is " + name);
+    return name;
+}
 
 
 var playerinfo = {
-    name: window.prompt("What is your robot's name?"),
+    name: getplayername,
     health: 100,
     attack: 10,
     money: 10,
