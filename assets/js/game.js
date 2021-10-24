@@ -168,18 +168,16 @@ var endgame = function() {
     }
 }
 var shop = function() {
-    var shopoptianpromot = window.prompt("Would you like to Refill your health,Upgrade your attack ,or Leave the shop ");
+    var shopoptianpromot = window.prompt("Would you like to REFILL your health, UPGRADE your attack, or LEAVE the store? Please enter one 1 for REFILL, 2 for UPGRADE, or 3 for LEAVE.");
+    shopoptianpromot = parseInt(shopoptianpromot);
     switch (shopoptianpromot) {
-        case "refill":
-        case "REFILL":
+        case 1:
             playerinfo.refillhealth();
             break;
-        case "upgrade":
-        case "UPGRADE":
+        case 2:
             playerinfo.upgradeattack();
             break;
-        case "leave":
-        case "LEAVE":
+        case 3:
             {
                 widoow.alert("Leaving the store. ")
                 break;
